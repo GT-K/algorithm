@@ -1,0 +1,17 @@
+#include<iostream>
+
+using namespace std;
+
+int T;
+
+int main(int argc, char** argv)
+{
+	//freopen("input.txt", "r", stdin);
+	cin>>T;
+    
+	for(int test_case = 1; test_case <= T; ++test_case)
+	{
+        
+	}
+	return 0;
+}
