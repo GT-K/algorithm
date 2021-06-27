@@ -12,17 +12,18 @@ void print(map<int, string> Target_Map)
 
 int main()
 {
-    map<int, string> Map;
-    Map[1] = "First";
-    Map[2] = "Second";
-    Map[3] = "Third";
-    Map[4] = "Fourth";
+    map<int, int> Map;
+    Map[1] = 10;
+    Map[2] = 20;
+    Map[3] = 30;
+    Map[4] = 40;
 
-    print(Map);
-    Map.erase(0);
-    print(Map);
-    Map.erase(Map.begin());
-    print(Map);
-    Map.erase(Map.begin(), Map.end());
-    print(Map);
+    for (auto iter : Map)
+        cout << iter.second;
+    Map[1] *= -1;
+    Map[2] *= -1;
+    Map[3] *= -1;
+    Map[4] *= -1;
+    for (auto iter : Map)
+        cout << iter.second;
 }
