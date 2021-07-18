@@ -10,34 +10,27 @@ int solution(int N, int number) {
     int answer = 0;
     unordered_map<int, set<int>> m;
 
-    m[1] = {-N, N};
+    int count = 1;
+    while (count <= 9) {
+        int num = N;
+        for (int i = 1; i < count; i++) num = num * 10 + N;
 
-    int count = 2;
-    while (count < 9) {
-        int tmp_num = N;
-        for (int i = 1; i < count; i++) {
-            tmp_num *= 10;
-            tmp_num += N;
-        }
-        m[count].insert(tmp_num);
-        m[count].insert(-tmp_num);
+        if (num == number || -num == number) return count;
+        m[count].insert(num);
 
         for (int i = 1; i <= count / 2; i++) {
             for (auto item1 : m[count - i]) {
                 for (auto item2 : m[i]) {
-                    int sum = item1 + item2;
-                    int sub = item1 > item2 ? item1 - item2 : item2 - item1;
-                    int mul = item1 * item2;
-                    int div1 = item2 ? item1 / item2 : 0;
-                    int div2 = item1 ? item2 / item1 : 0;
-                    if (sum == number || sub == number || mul == number || div1 == number || div2 == number)
-                        return count;
+                    vector<int> tmp_v;
+                    tmp_v.emplace_back(item1 + item2);
+                    tmp_v.emplace_back(item1 - item2);
+                    tmp_v.emplace_back(item1 * item2);
+                    tmp_v.emplace_back(item1 >= item2 && item2 != 0 ? item1 / item2 : 0);
 
-                    m[count].insert(sum); m[count].insert(-sum);
-                    m[count].insert(sub); m[count].insert(-sub);
-                    m[count].insert(mul); m[count].insert(-mul);
-                    m[count].insert(div1); m[count].insert(-div1);
-                    m[count].insert(div2); m[count].insert(-div2);
+                    for (auto num : tmp_v) {
+                        if (num == number || -num == number) return count;
+                        m[count].insert(num);
+                    }
                 }
             }
         }
